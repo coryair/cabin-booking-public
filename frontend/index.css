@@ -6050,7 +6050,25 @@ html.admin-scroll-page #root {
   font-size: 12px;
   line-height: 1.5;
 }
-.demo-intro, .demo-note { line-height: 1.6; color: #495b51; }
+.demo-intro, .demo-note { line-height: 1.6; color: var(--text-muted); }
 .demo-intro { margin: 0 0 24px; }
 .demo-note { margin: 24px 0 16px; font-size: 13px; }
 .demo-actions { display: grid; gap: 12px; }
+
+#root:has(.demo-banner) > .login-page {
+  height: calc(100dvh - 34px);
+  min-height: 0;
+  overflow-y: auto;
+  align-items: flex-start;
+}
+#root:has(.demo-banner) .login-card { margin: auto; padding: 16px 0; }
+#root:has(.demo-banner) .login-logo {
+  max-width: 112px;
+  filter: none;
+  mix-blend-mode: normal;
+}
+@media (min-width: 768px) {
+  #root:has(.demo-banner) > .login-page {
+    height: calc(100dvh / var(--site-zoom) - 34px);
+  }
+}
