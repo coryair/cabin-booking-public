@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="4" fill="#1B3A2D"/>
+  <path d="M32 12L16 44h32L32 12z" fill="#D4A843"/>
+  <path d="M32 18L20 44h24L32 18z" fill="#1B3A2D"/>
+  <path d="M32 24L24 44h16L32 24z" fill="#D4A843" opacity="0.6"/>
+  <path d="M12 44L18 32l6 12H12z" fill="#5B8C6B"/>
+  <path d="M40 44L46 32l6 12H40z" fill="#5B8C6B"/>
+  <path d="M14 44L18 36l4 8H14z" fill="#5B8C6B" opacity="0.7"/>
+  <path d="M42 44L46 36l4 8H42z" fill="#5B8C6B" opacity="0.7"/>
+  <line x1="8" y1="44" x2="56" y2="44" stroke="#D4A843" stroke-width="2"/>
+  <text x="32" y="56" text-anchor="middle" fill="#D4A843" font-family="sans-serif" font-size="6" font-weight="bold">CABINS</text>
+</svg>

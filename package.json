@@ -1,0 +1,34 @@
+{
+  "name": "cabin-booking",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun frontend/index.ts",
+    "build": "bun build ./frontend/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint frontend scripts",
+    "test": "bun test",
+    "validate": "bun run typecheck && bun run lint && bun test",
+    "check": "bun run validate && bun run build",
+    "build:vercel": "rm -rf public && bun run validate && bun build ./frontend/index.html --outdir=public --sourcemap --target=browser --minify --public-path=/ --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+    "start": "NODE_ENV=production bun frontend/index.ts",
+    "init-schema": "python3 backend/init_schema.py"
+  },
+  "dependencies": {
+    "postgres": "^3",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/bun": "latest",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^10.7.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.7.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.64.0"
+  }
+}
