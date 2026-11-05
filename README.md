@@ -4,6 +4,8 @@ A full-stack reservation system for shared cabin ownership. It handles the rules
 
 **React 19 · TypeScript · Bun · Python · FastAPI · SQLAlchemy · PostgreSQL · Stripe · Resend**
 
+**[Explore the live demo](https://cabin-booking-public.vercel.app)** - choose a member or administrator role. The demo uses fictional data and simulated payments; changes are temporary.
+
 This repository is a public portfolio edition of a private application. It preserves the application logic and regression tests while using fictional members, cabins, and reservations.
 
 ## Why I built it
@@ -23,6 +25,25 @@ Members can browse a multi-month calendar, book overnight or day-use stays, mana
 - **Payment lifecycle:** Stripe Checkout, webhook processing, unpaid reservation cleanup, guest adjustments, and refund policies.
 - **Notifications:** Booking confirmations, reservation and booking-window reminders, and opt-in alerts when cancellations release availability.
 - **Administrative tools:** Season configuration, reservation management, analytics, and date simulation for inspecting booking windows.
+
+## Screenshots
+
+The live demo includes a member booking calendar and an administrative dashboard for reservations, rates, shares, and booking seasons.
+
+![Administrative dashboard with fictional reservation totals and recent activity](docs/screenshots/admin-dashboard.jpg)
+
+<details>
+<summary>Booking calendar and demo sign-in</summary>
+
+**Booking calendar:** cabin availability, seasonal rules, and reservation history.
+
+![Booking calendar showing seasonal rules and fictional cabin reservations](docs/screenshots/booking-calendar.jpg)
+
+**Demo sign-in:** explore either role without creating an account.
+
+![Demo welcome screen with member and administrator sign-in buttons](docs/screenshots/demo-welcome.jpg)
+
+</details>
 
 ## Engineering highlights
 
@@ -64,7 +85,7 @@ Start with [stripe_webhook_regression.py](backend/tests/stripe_webhook_regressio
 
 The main source directories are [`frontend/`](frontend), [`backend/routers/`](backend/routers), [`backend/services/`](backend/services), and [`backend/db/`](backend/db). Deployment routing and schedules are in [`vercel.json`](vercel.json).
 
-## Run the demo
+## Run locally
 
 Requires Bun and Python 3.12. No external payment or email credentials are needed for local exploration.
 
