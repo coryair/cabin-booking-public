@@ -70,7 +70,7 @@ def login(
         value=session.id,
         httponly=True,
         samesite="lax",
-        secure=is_production,
+        secure=is_production or settings.demo_mode,
         max_age=60 * 60 * 24 * settings.session_expire_days,
     )
 
@@ -120,7 +120,7 @@ def verify_magic_link(
         value=session.id,
         httponly=True,
         samesite="lax",
-        secure=is_production,
+        secure=is_production or settings.demo_mode,
         max_age=60 * 60 * 24 * settings.session_expire_days,
     )
 

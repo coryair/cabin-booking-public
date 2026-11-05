@@ -1,6 +1,7 @@
 import json
 import os
 import secrets
+import tempfile
 
 from pydantic_settings import BaseSettings
 from pathlib import Path
@@ -47,6 +48,7 @@ def _resolve_cors_origins() -> list[str]:
 
 
 class Settings(BaseSettings):
+    demo_mode: bool = False
     database_url: str = _resolve_database_url()
     booking_timezone: str = "America/Denver"
     session_expire_days: int = 14
@@ -81,6 +83,15 @@ else:
 # In development, always use local SQLite - env files may contain production DATABASE_URL
 if settings.environment != "production":
     settings.database_url = _default_sqlite
+
+# Public demos are isolated even if unrelated deployment variables are present.
+if settings.demo_mode:
+    settings.environment = "demo"
+    settings.database_url = f"sqlite:///{Path(tempfile.mkdtemp(prefix='cabin-demo-')) / 'cabins.db'}"
+    settings.resend_api_key = ""
+    settings.stripe_secret_key = ""
+    settings.stripe_publishable_key = ""
+    settings.stripe_webhook_secret = ""
 
 cors_origins = _resolve_cors_origins()
 

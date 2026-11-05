@@ -222,7 +222,7 @@ def create_checkout_session(
 ):
     """Create an unpaid reservation and a Stripe Checkout Session."""
     ensure_not_viewer(current)
-    if not settings.stripe_secret_key:
+    if not settings.demo_mode and not settings.stripe_secret_key:
         raise HTTPException(status_code=500, detail="Stripe is not configured")
 
     stripe.api_key = settings.stripe_secret_key
@@ -240,11 +240,17 @@ def create_checkout_session(
         db,
         reservation,
         is_admin=is_admin,
-        status="unpaid",
+        status="paid" if settings.demo_mode else "unpaid",
         booked_by_shareholder_id=current.id,
     )
     if error:
         raise HTTPException(status_code=400, detail=error)
+
+    if settings.demo_mode:
+        return {
+            "checkout_url": f"/booking/success?reservation_id={db_reservation.id}",
+            "reservation_id": db_reservation.id,
+        }
 
     frontend_base_url = resolve_frontend_base_url(request)
 

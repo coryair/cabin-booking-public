@@ -70,6 +70,29 @@ export function LoginPage({ onLogin, onSendMagicLink, error, isLoading }: LoginP
     </div>
   );
 
+  if (process.env.BUN_PUBLIC_DEMO_MODE === "true") {
+    return (
+      <div className="login-page">
+        <div className="login-card">
+          {badge}
+          <h2 className="login-heading">Explore Cabin Booking</h2>
+          <p className="demo-intro">A working demo of a family cabin reservation system. Choose a role to explore.</p>
+          <div className="demo-actions">
+            <button className="login-button" disabled={isLoading} onClick={() => onLogin("alder@example.com", "password")}>
+              {isLoading ? "SIGNING IN..." : "EXPLORE AS A MEMBER"}
+            </button>
+            <button className="login-button secondary" disabled={isLoading} onClick={() => onLogin("admin@example.com", "password")}>
+              EXPLORE AS AN ADMIN
+            </button>
+          </div>
+          {error && <p className="login-error">{error}</p>}
+          <p className="demo-note">Fictional data only. Changes are shared and temporary, and may reset at any time. Bookings simulate payment; no real email or charges.</p>
+          <a className="login-link-button" href="https://github.com/coryair/cabin-booking-public" target="_blank" rel="noreferrer">View the source on GitHub</a>
+        </div>
+      </div>
+    );
+  }
+
   if (view === "check-email") {
     return (
       <div className="login-page">

@@ -113,9 +113,3 @@ python backend/tests/booking_window_reminder_email_regression.py
 ```
 
 These checks passed during preparation of this public edition, along with demo seeding and an API smoke check for login, session authentication, and cabin listing. Additional scenarios live in [`backend/tests/`](backend/tests); some require a running local backend and modify demo data. This does not imply that the entire regression collection or live third-party integrations were validated.
-
-## Deployment and public-edition scope
-
-The repository includes deployment configuration, but a hosted installation needs its own database, application URL, allowed origins, session secret, and payment/email credentials. See [`.env.example`](.env.example) for configuration names. Email templates use `example.com` placeholders that must be replaced before sending real email.
-
-Personal data, private assets, production configuration, operational scripts, and original Git history are excluded. See [SANITIZATION.md](SANITIZATION.md) for the preparation and validation details. No open-source license has been selected.

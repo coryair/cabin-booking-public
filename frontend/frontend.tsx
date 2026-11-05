@@ -12,6 +12,9 @@ import { App } from "./App";
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
+    {process.env.BUN_PUBLIC_DEMO_MODE === "true" && (
+      <div className="demo-banner">PUBLIC DEMO · Fictional data · Simulated payments · Changes may reset</div>
+    )}
     <App />
   </StrictMode>
 );

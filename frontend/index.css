@@ -6040,3 +6040,17 @@ html.admin-scroll-page #root {
     left: 12px !important;
   }
 }
+
+/* Public portfolio demo */
+.demo-banner {
+  background: #1b3a2d;
+  color: #fff5d6;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.demo-intro, .demo-note { line-height: 1.6; color: #495b51; }
+.demo-intro { margin: 0 0 24px; }
+.demo-note { margin: 24px 0 16px; font-size: 13px; }
+.demo-actions { display: grid; gap: 12px; }

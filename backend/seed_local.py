@@ -28,7 +28,7 @@ def hash_pw(password: str) -> str:
 if settings.environment == "production":
     raise SystemExit("Demo seeding is only allowed in development.")
 Path(settings.database_url.removeprefix("sqlite:///")).parent.mkdir(parents=True, exist_ok=True)
-SEED_PASSWORD = os.environ.get("SEED_PASSWORD", "password")
+SEED_PASSWORD = "password" if settings.demo_mode else os.environ.get("SEED_PASSWORD", "password")
 SU_PASSWORD = SEED_PASSWORD
 
 force = "--force" in sys.argv

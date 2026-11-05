@@ -33,6 +33,9 @@ class AuthService:
 
     @staticmethod
     def create_session(db: DBSession, shareholder_id: int) -> Session:
+        if settings.demo_mode:
+            # Public fixture identities survive worker resets; these are not secrets.
+            return Session(id=f"demo-{shareholder_id}", shareholder_id=shareholder_id)
         session_id = str(uuid.uuid4())
         expires_at = datetime.utcnow() + timedelta(days=settings.session_expire_days)
 
@@ -72,6 +75,13 @@ class AuthService:
 
     @staticmethod
     def get_shareholder_by_session(db: DBSession, session_id: str) -> Shareholder | None:
+        if settings.demo_mode and session_id.startswith("demo-"):
+            demo_id = session_id.removeprefix("demo-")
+            if demo_id.isdigit():
+                return db.query(Shareholder).options(joinedload(Shareholder.share_rel)).filter(
+                    Shareholder.id == int(demo_id)
+                ).first()
+            return None
         session = AuthService.get_session(db, session_id)
         if not session:
             return None
