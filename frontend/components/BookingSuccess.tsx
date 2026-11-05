@@ -82,6 +82,7 @@ export function BookingSuccess({ reservationId, adjustmentId, onReturn }: Bookin
     return () => { cancelled = true; };
   }, [reservationId, adjustmentId, pollCount]);
 
+  const isDemo = process.env.BUN_PUBLIC_DEMO_MODE === "true";
   const isPaid = reservation?.status === "paid" && !adjustmentPending;
   const isProcessing = reservation?.status === "unpaid" || adjustmentPending;
   const isDelayed = isProcessing && pollCount >= MAX_POLLS;
@@ -132,7 +133,7 @@ export function BookingSuccess({ reservationId, adjustmentId, onReturn }: Bookin
                   <circle cx="12" cy="12" r="10" />
                   <path d="M8 12l3 3 5-5" />
                 </svg>
-                <h3 className="wizard-result-title">{adjustmentId ? "Guest Update Confirmed" : "Payment Confirmed"}</h3>
+                <h3 className="wizard-result-title">{isDemo ? "Demo Booking Confirmed" : adjustmentId ? "Guest Update Confirmed" : "Payment Confirmed"}</h3>
                 <p className="wizard-result-detail">
                   {cabinStr} &mdash; {stayLabel}
                 </p>
@@ -155,12 +156,12 @@ export function BookingSuccess({ reservationId, adjustmentId, onReturn }: Bookin
                   <span>{reservation.id}</span>
                 </div>
                 <div className="cost-row total">
-                  <span>Total Paid</span>
+                  <span>{isDemo ? "Simulated Total" : "Total Paid"}</span>
                   <span>${reservation.cost.toFixed(2)}</span>
                 </div>
               </div>
               <p className="field-hint" style={{ marginTop: "12px", textAlign: "center" }}>
-                {adjustmentId ? "Your guest adjustment has been applied." : "A confirmation email has been sent to your inbox."}
+                {isDemo ? "No payment was taken and no email was sent. This demo booking is temporary." : adjustmentId ? "Your guest adjustment has been applied." : "A confirmation email has been sent to your inbox."}
               </p>
             </>
           ) : (

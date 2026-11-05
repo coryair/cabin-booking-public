@@ -486,7 +486,7 @@ export function BookingModal({
                     className="confirm-btn"
                     disabled={isSubmitting || selectedCabins.length === 0 || Boolean(stepOneBlockReason)}
                   >
-                    {isSubmitting ? "Processing..." : stepOneBlockReason ? "Booking Unavailable" : "Confirm & Pay"}
+                    {isSubmitting ? "Processing..." : stepOneBlockReason ? "Booking Unavailable" : process.env.BUN_PUBLIC_DEMO_MODE === "true" ? "Confirm Demo Booking" : "Confirm & Pay"}
                   </button>
                 )}
               </div>

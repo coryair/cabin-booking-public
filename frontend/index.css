@@ -6072,3 +6072,14 @@ html.admin-scroll-page #root {
     height: calc(100dvh / var(--site-zoom) - 34px);
   }
 }
+
+#root:has(.demo-banner) > .app:has(.booking-success) {
+  height: calc(100dvh - 34px);
+  overflow-y: auto;
+}
+#root:has(.demo-banner) .booking-success { min-height: 0; flex: 1; }
+@media (min-width: 768px) {
+  #root:has(.demo-banner) > .app:has(.booking-success) {
+    height: calc(100dvh / var(--site-zoom) - 34px);
+  }
+}
